@@ -1,1 +1,1 @@
-var controllers = angular.module('appControllers', []); 
+var controllers = angular.module('emControllers', []); 
