@@ -40,23 +40,28 @@ controllers.controller('DashboardCtrl', ['$scope', 'chartFactory', function($sco
 		expenses: [{
 			date: '2014-03-19',
 			amount: '85',
-			description: 'Lunch'
+			description: 'Lunch',
+			category: 'Food'
 		}, {
 			date: '2014-03-20',
 			amount: '150',
-			description: 'Gas'
+			description: 'Gas',
+			category: 'Other'
 		}, {
 			date: '2014-03-22',
 			amount: '220',
-			description: 'Movies'
+			description: 'Movies',
+			category: 'Entertainment'
 		}, {
 			date: '2014-03-23',
 			amount: '95',
-			description: 'Lunch'
+			description: 'Lunch',
+			category: 'Food'
 		}, {
 			date: '2014-03-23',
 			amount: '168',
-			description: 'Groceries'
+			description: 'Groceries',
+			category: 'Food'
 		}]
 	};
 
