@@ -1,6 +1,6 @@
-var chartFactory = angular.module('emPlot', []);
+var emPlot = angular.module('emPlot', []);
 
-chartFactory.factory('chartFactory', function() {
+emPlot.factory('chartFactory', function() {
 	
 	function drawArea(element, data, metaInfo) {
 		Morris.Area({

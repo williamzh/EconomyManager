@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-12">
-    <h1>Dashboard <small>{{period.display}}</small></h1>
+    <h1>Dashboard <small>{{period.startDate | date: 'MMMM y'}}</small></h1>
    <!--  <ol class="breadcrumb">
       <li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
     </ol> -->
@@ -22,7 +22,7 @@
             <i class="fa fa-money fa-5x"></i>
           </div>
           <div class="col-xs-9 text-right">
-            <p class="announcement-heading">{{expenseData.total}}</p>
+            <p class="announcement-heading">{{expenseData.total | currency}}</p>
             <p class="announcement-text">spent this month</p>
           </div>
         </div>
@@ -50,7 +50,7 @@
           </div>
           <div class="col-xs-8 text-right">
             <p class="announcement-heading">{{incomeData.daysRemaining}}</p>
-            <p class="announcement-text">days until next payday</p>
+            <p class="announcement-text">days until next salary</p>
           </div>
         </div>
       </div>
@@ -129,7 +129,7 @@
   <div class="col-lg-12">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Expense history: {{period.startDate}} - {{period.endDate}}</h3>
+        <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Expense history: {{period.startDate | date: 'MMM d'}} - {{period.endDate | date: 'MMM d'}}</h3>
       </div>
       <div class="panel-body">
         <div id="morris-chart-area"></div>
@@ -171,7 +171,7 @@
             </thead>
             <tbody>
               <tr ng-repeat="exp in expenseData.expenses">
-                <td>{{exp.date}}</td>
+                <td>{{exp.date | date: 'yyyy-MM-dd'}}</td>
                 <td>{{exp.amount}}</td>
                 <td>{{exp.description}}</td>
                 <td>{{exp.category}}</td>

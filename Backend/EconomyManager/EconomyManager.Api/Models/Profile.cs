@@ -9,7 +9,8 @@ namespace EconomyManager.Api.Models
 	{
 		public int UserId { get; set; }
 		public DateTime Created { get; set; }
-		public IEnumerable<Income> Incomes { get; set; }
-		public IEnumerable<Expense> Expenses { get; set; }
+		public ICollection<Income> Incomes { get; set; }
+		public ICollection<Expense> Expenses { get; set; }
+		public ICollection<Invoice> Invoices { get; set; }
 	}
 }

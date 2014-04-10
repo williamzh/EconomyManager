@@ -17,9 +17,10 @@ namespace EconomyManager.Api
 		{
 			AreaRegistration.RegisterAllAreas();
 
-			WebApiConfig.Register(GlobalConfiguration.Configuration);
+			//WebApiConfig.Register(GlobalConfiguration.Configuration);
+			GlobalConfiguration.Configure(WebApiConfig.Register);
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-			RouteConfig.RegisterRoutes(RouteTable.Routes);
+			//RouteConfig.RegisterRoutes(RouteTable.Routes);
 
 			var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
 			json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

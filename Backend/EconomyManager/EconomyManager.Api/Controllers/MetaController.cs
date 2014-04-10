@@ -11,25 +11,16 @@ using System.Web.Http.Cors;
 namespace EconomyManager.Api.Controllers
 {
 	[EnableCors(origins: "http://localhost:8000", headers: "*", methods: "*")]
-	public class IncomesController : ApiController
+	[RoutePrefix("api/meta")]
+	public class MetaController : ApiController
 	{
-		private readonly IProfileService _profileService;
-
-		public IncomesController(IProfileService profileService)
+		// GET api/meta/period
+		[Route("period")]
+		public Response<Period> Get()
 		{
-			_profileService = profileService;
-		}
-
-		// GET api/incomes
-		public Response<IEnumerable<Income>> Get()
-		{
-			var userId = 1;	// TODO: get user from AUTH header
-
-			var profile = _profileService.GetProfile(userId);
-
-			return new Response<IEnumerable<Income>>
+			return new Response<Period>
 			{
-				Data = profile.Incomes
+				Data = PeriodService.CurrentPeriod
 			};
 		}
 

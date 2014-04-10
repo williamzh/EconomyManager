@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,8 +15,7 @@ namespace EconomyManager.Api.Models
 
 	public class Response<T>
 	{
-		public DateTime StartDate { get; set; }
-		public DateTime EndDate { get; set; }
+		[JsonConverter(typeof(StringEnumConverter))]
 		public ResponseStatus Status { get; set; }
 		public T Data { get; set; }
 		public ErrorInfo Error { get; set; }

@@ -31,7 +31,7 @@ namespace EconomyManager.Api.DependencyResolution
 					scan.TheCallingAssembly();
 					scan.WithDefaultConventions();
 				});
-				x.For<IProfileService>().Use<ProfileService>();
+				x.For<IProfileService>().Singleton().Use<ProfileService>();
 			});
 			return ObjectFactory.Container;
 		}

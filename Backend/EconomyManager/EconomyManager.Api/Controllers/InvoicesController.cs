@@ -1,24 +1,40 @@
-﻿using System;
+﻿using EconomyManager.Api.Domain;
+using EconomyManager.Api.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace EconomyManager.Api.Controllers
 {
+	[EnableCors(origins: "http://localhost:8000", headers: "*", methods: "*")]
+	[RoutePrefix("api/invoices")]
 	public class InvoicesController : ApiController
 	{
-		// GET api/<controller>
-		public IEnumerable<string> Get()
+		private readonly IProfileService _profileService;
+
+		public InvoicesController(IProfileService profileService)
 		{
-			return new string[] { "value1", "value2" };
+			_profileService = profileService;
 		}
 
-		// GET api/<controller>/5
-		public string Get(int id)
+		// GET api/invoices/2014/04
+		[Route("{*date:datetime:regex(\\d{4}/\\d{2})?}")]
+		public Response<IEnumerable<Invoice>> Get(DateTime? date = null)
 		{
-			return "value";
+			var startDate = date.HasValue ? date.Value : DateTime.Today;
+
+			var userId = 1;	// TODO: get user from AUTH header
+
+			var profile = _profileService.GetProfile(userId);
+			
+			return new Response<IEnumerable<Invoice>>
+			{
+				Data = profile.Invoices
+			};
 		}
 
 		// POST api/<controller>
