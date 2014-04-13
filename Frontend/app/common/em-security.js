@@ -18,11 +18,16 @@ emSecurity.service('authService', ['$cookieStore', '$http', function($cookieStor
 			UserName: username,
 			Password: password
 		}).then(function(response) {
-			$cookieStore.put('auth', response.data.data);		//william:test1234
+			if(response.data.status === 'Ok') {
+				$cookieStore.put('auth', response.data.data);
+			}
+			else {
+				if(errorFn) { errorFn(); }
+			}
 			
 			if(successFn) { successFn(); }
 		}, function(error) {
-			if(errorFn) { errorFn(error); }
+			console.err(error);
 		});
 	}
 	
