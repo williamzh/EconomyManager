@@ -10,6 +10,7 @@ using System.Web.Http.Cors;
 
 namespace EconomyManager.Api.Controllers
 {
+	[Authorize]
 	[EnableCors(origins: "http://localhost:8000", headers: "*", methods: "*")]
 	[RoutePrefix("api/meta")]
 	public class MetaController : ApiController

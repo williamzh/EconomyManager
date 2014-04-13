@@ -10,6 +10,7 @@ using System.Web.Http.Cors;
 
 namespace EconomyManager.Api.Controllers
 {
+	[Authorize]
 	[EnableCors(origins: "http://localhost:8000", headers: "*", methods: "*")]
 	[RoutePrefix("api/expenses")]
 	public class ExpensesController : ApiController
@@ -25,7 +26,7 @@ namespace EconomyManager.Api.Controllers
 		[Route("{*date:datetime:regex(\\d{4}/\\d{2})?}")]
 		public Response<IEnumerable<Expense>> GetExpenses(DateTime? date = null)
 		{
-			var startDate = date.HasValue ? date.Value : DateTime.Today;
+			var startDate = date.HasValue ? date.Value : PeriodService.CurrentPeriod.StartDate;
 
 			var userId = 1;	// TODO: get user from AUTH header
 
@@ -41,7 +42,7 @@ namespace EconomyManager.Api.Controllers
 		[Route("history/{*date:datetime:regex(\\d{4}/\\d{2})?}")]
 		public Response<IDictionary<DateTime, decimal>> GetHistory(DateTime? date = null)
 		{
-			var startDate = date.HasValue ? date.Value : DateTime.Today;
+			var startDate = date.HasValue ? date.Value : PeriodService.CurrentPeriod.StartDate;
 
 			var userId = 1;	// TODO: get user from AUTH header
 
@@ -51,12 +52,11 @@ namespace EconomyManager.Api.Controllers
 			var expenseHistory = currentExpenses.GroupBy(e => e.Date.Day).OrderBy(g => g.Key);
 
 			var history = new Dictionary<DateTime, decimal>();
-			var currentPeriod = PeriodService.CurrentPeriod;
 
-			var daysInMonth = DateTime.DaysInMonth(currentPeriod.StartDate.Year, currentPeriod.StartDate.Month);
+			var daysInMonth = DateTime.DaysInMonth(startDate.Year, startDate.Month);
 			for (var d = 1; d <= daysInMonth; d++)
 			{
-				var day = new DateTime(currentPeriod.StartDate.Year, currentPeriod.StartDate.Month, d);
+				var day = new DateTime(startDate.Year, startDate.Month, d);
 
 				var matchingDay = expenseHistory.FirstOrDefault(e => e.Key == d);
 				var dailyAmount = (matchingDay != null) ? matchingDay.Sum(g => g.Amount) : 0;
@@ -73,7 +73,7 @@ namespace EconomyManager.Api.Controllers
 		[Route("distribution/{*date:datetime:regex(\\d{4}/\\d{2})?}")]
 		public Response<IDictionary<ExpenseCategory, double>> GetDistribution(DateTime? date = null)
 		{
-			var startDate = date.HasValue ? date.Value : DateTime.Today;
+			var startDate = date.HasValue ? date.Value : PeriodService.CurrentPeriod.StartDate;
 
 			var userId = 1;	// TODO: get user from AUTH header
 

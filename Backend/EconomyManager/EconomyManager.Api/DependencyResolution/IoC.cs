@@ -17,6 +17,7 @@
 
 
 using EconomyManager.Api.Domain;
+using EconomyManager.Api.Security;
 using StructureMap;
 namespace EconomyManager.Api.DependencyResolution
 {
@@ -31,7 +32,13 @@ namespace EconomyManager.Api.DependencyResolution
 					scan.TheCallingAssembly();
 					scan.WithDefaultConventions();
 				});
+				x.For<ITokenService>().Singleton().Use<TokenService>();
 				x.For<IProfileService>().Singleton().Use<ProfileService>();
+
+				x.SetAllProperties(p =>
+				{
+					p.OfType<ITokenService>();
+				});
 			});
 			return ObjectFactory.Container;
 		}

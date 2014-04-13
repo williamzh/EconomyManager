@@ -17,7 +17,7 @@ namespace EconomyManager.Api.Models
 	{
 		[JsonConverter(typeof(StringEnumConverter))]
 		public ResponseStatus Status { get; set; }
-		public T Data { get; set; }
 		public ErrorInfo Error { get; set; }
+		public T Data { get; set; }	
 	}
 }

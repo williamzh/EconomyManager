@@ -125,6 +125,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\StructuremapMvc.cs" />
+    <Compile Include="Security\BasicAuthModule.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\IncomesController.cs" />
     <Compile Include="Controllers\InvoicesController.cs" />
@@ -138,16 +140,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Membership\IUser.cs" />
+    <Compile Include="Security\ITokenService.cs" />
+    <Compile Include="Security\Token.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\ErrorInfo.cs" />
     <Compile Include="Models\Expense.cs" />
     <Compile Include="Models\Income.cs" />
     <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\Login.cs" />
     <Compile Include="Models\MonetaryItem.cs" />
     <Compile Include="Models\Period.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\TokenService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -164,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Security\Entities\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
