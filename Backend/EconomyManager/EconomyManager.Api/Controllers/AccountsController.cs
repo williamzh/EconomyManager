@@ -13,6 +13,7 @@ namespace EconomyManager.Api.Controllers
 {
 	[Authorize]
 	[EnableCors(origins: "http://localhost:8000", headers: "*", methods: "*")]
+	[RoutePrefix("api/accounts")]
 	public class AccountsController : ApiController
 	{
 		private readonly IProfileService _profileService;
@@ -24,29 +25,20 @@ namespace EconomyManager.Api.Controllers
 			_tokenService = tokenService;
 		}
 
-		// POST api/login
-		[Route("api/login")]
-		[AllowAnonymous]
-		public Response<Token> Login([FromBody]Login login)
+		// GET api/accounts/<token>
+		[Route("{token:guid}")]
+		public Response<User> Get(string token)
 		{
-			var isUserAuthenticated = (login.UserName == "william" && login.Password == "test1234");
-			return new Response<Token>
+			var user = _tokenService.GetUser(token);
+			// Temp
+			user.FirstName = "William";
+			user.LastName = "Zhang";
+			// --
+
+			return new Response<User>
 			{
-				Status = isUserAuthenticated ? ResponseStatus.Ok : ResponseStatus.Failed,
-				Data = isUserAuthenticated ? _tokenService.Create(login.UserName) : null
+				Data = user
 			};
-		}
-
-		// GET api/accounts
-		public IEnumerable<User> Get()
-		{
-			return new [] { new User { FirstName = "William", Lastname = "Zhang" } };
-		}
-
-		// GET api/<controller>/5
-		public User Get(int id)
-		{
-			return new User { FirstName = "William", Lastname = "Zhang" };
 		}
 
 		// POST api/accounts

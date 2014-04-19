@@ -37,22 +37,30 @@ recipeRepoApp.run(['$rootScope', '$http', '$location', 'authService', function($
 			return;
 		}
 
-    var authToken = authService.getToken();
+		// var authToken = authService.getToken();
 
-		if(authToken === null) {
-			$location.path('/login');
+		if(authService.isUserAuthenticated()) {
+			$rootScope.$emit('ev_userAuthenticated');
 		}
-		else {
-			$http.defaults.headers.common['Bearer'] = authToken.value;
-		}
+		// 	$location.path('/login');
+		// }
+		// else {
+		// 	$http.defaults.headers.common['Bearer'] = authToken.value;
+		// }
   });
 }]);
 
-recipeRepoApp.factory('authInterceptor', ['$q', '$location', function($q, $location) {
+recipeRepoApp.factory('authInterceptor', ['$q', '$location', 'authService', function($q, $location, authService) {
   return {
-    // request: function (config) {
-    //   return config || $q.when(config);
-    // },
+    request: function (config) {
+    	var authToken = authService.getToken();
+
+    	if(authToken !== null) {
+    		config.headers['Bearer'] = authToken.value;
+      }
+
+      return config || $q.when(config);
+    },
     // requestError: function(request){
     //   return $q.reject(request);
     // },

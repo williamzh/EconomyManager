@@ -30,3 +30,7 @@ Date.prototype.toDays = function() {
 	// Convert back to days
 	return Math.ceil(this.getTime() / oneDay);	
 }
+
+Date.nowAsDate = function() {
+	return new Date();
+}
