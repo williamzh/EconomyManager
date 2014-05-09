@@ -9,7 +9,7 @@ namespace EconomyManager.Api.Domain
 {
 	public interface IProfileService
 	{
-		void CreateProfile(string username, IEnumerable<Income> incomes);
+		void CreateProfile(string username, string password, IEnumerable<Income> incomes);
 		Profile GetProfile(int userId);
 		void UpdateProfile(int userId, IEnumerable<Income> incomes, IEnumerable<Expense> expenses);
 		void RemoveProfile(int userId);

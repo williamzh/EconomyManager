@@ -9,6 +9,7 @@ using System.Web.Http.Cors;
 
 namespace EconomyManager.Api.Controllers
 {
+	[InitializeSimpleMembership]
 	[EnableCors(origins: "http://localhost:8000", headers: "*", methods: "*")]
 	public class AuthController : ApiController
 	{
@@ -22,7 +23,7 @@ namespace EconomyManager.Api.Controllers
 		// POST api/auth
 		public Response<Token> Post([FromBody]Login login)
 		{
-			var isUserAuthenticated = (login.UserName == "william" && login.Password == "test1234");
+			var isUserAuthenticated = (login.UserName == "william.zhang@test.com" && login.Password == "test1234");
 			return new Response<Token>
 			{
 				Status = isUserAuthenticated ? ResponseStatus.Ok : ResponseStatus.Failed,

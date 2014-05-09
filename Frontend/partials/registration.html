@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Register</h3>
+        </div>
+        <div class="panel-body">
+          <fieldset>
+            <div class="alert alert-danger" ng-hide="hasError == false">{{errorMessage}}</div>
+
+            <div class="form-group">
+              <label for="txtUsername">Username</label>
+              <input type="text" id="txtUsername" class="form-control" autofocus ng-model="username">
+              <span class="help-block">Username can contain any letters or numbers, without spaces</span>
+            </div>
+            <div class="form-group">
+              <label for="txtPassword">Password</label>
+              <input type="password" class="form-control" ng-model="password">
+              <span class="help-block">Password should be at least 4 characters</span>
+            </div>
+            <div class="form-group">
+              <label for="txtPasswordConfirm">Confirm password</label>
+              <input type="password" class="form-control" ng-model="passwordConfirm">
+              <span class="help-block"></span>
+            </div>
+
+            <hr />
+
+            <button type="button" class="btn btn-lg btn-success" ng-click="onRegister()">Register</button>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

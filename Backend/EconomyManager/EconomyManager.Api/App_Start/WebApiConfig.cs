@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace EconomyManager.Api
 {
@@ -9,6 +10,10 @@ namespace EconomyManager.Api
 	{
 		public static void Register(HttpConfiguration config)
 		{
+			//var trace = config.EnableSystemDiagnosticsTracing();
+			//trace.IsVerbose = true;
+			//trace.MinimumLevel = TraceLevel.Debug;
+
 			config.EnableCors();
 
 			config.MapHttpAttributeRoutes();

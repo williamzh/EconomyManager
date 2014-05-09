@@ -3,14 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebMatrix.WebData;
 
 namespace EconomyManager.Api.Domain
 {
 	public class ProfileService : IProfileService
 	{
-		public void CreateProfile(string username, IEnumerable<Income> incomes)
+		public void CreateProfile(string username, string password, IEnumerable<Income> incomes)
 		{
-
+			WebSecurity.CreateUserAndAccount(username, password);
+			//WebSecurity.Login(model.UserName, model.Password);
 		}
 
 		public Profile GetProfile(int userId)

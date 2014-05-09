@@ -17,10 +17,10 @@ recipeRepoApp.config(['$routeProvider', '$httpProvider', function($routeProvider
 			templateUrl: 'partials/login.html', 
 			controller: 'LoginCtrl' 
 		}).
-		// when('/recipes/:recipeId', { 
-		// 	templateUrl: 'partials/recipe-details.html', 
-		// 	controller: 'RecipeDetailsCtrl'
-		// }).
+		when('/register', { 
+			templateUrl: 'partials/registration.html', 
+			controller: 'RegistrationCtrl'
+		}).
 		otherwise({
 			redirectTo: '/'
 		});
